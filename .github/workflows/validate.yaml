@@ -12,3 +12,5 @@ jobs:
 
       - name: Verify
         run: emcc -v
+      - run: node --version
+      - run: npm --version
