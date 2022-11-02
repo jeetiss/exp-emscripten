@@ -19,7 +19,7 @@ void setFunc(CallbackWrapper *js_func) {
   func.reset(js_func);
 };
 
-void unsetMeasureFunc(void) {
+void unsetFunc(void) {
   func.reset(nullptr);
 };
 
@@ -38,7 +38,7 @@ EMSCRIPTEN_BINDINGS(my_module) {
   ;
 
   emscripten::function("setFunc", &setFunc, emscripten::allow_raw_pointers());
-  emscripten::function("unsetMeasureFunc", &unsetMeasureFunc);
+  emscripten::function("unsetFunc", &unsetFunc);
   emscripten::function("runCpp", &runCpp);
 }
 
