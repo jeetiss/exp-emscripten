@@ -1,0 +1,5 @@
+node_modules
+
+builded.mjs
+builded.wasm
+.DS_Store
