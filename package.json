@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "emcc interop/*.cc --bind -Os -g0 --closure 1 -o interop/builded.mjs",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "~0.24.5"
+  }
+}
