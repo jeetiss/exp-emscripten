@@ -33,6 +33,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: wasm
+      - run: ls -l interop
       - name: Install
         run: npm ci
       - name: Test
