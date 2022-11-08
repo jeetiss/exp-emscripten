@@ -33,6 +33,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: wasm
+          path: interop/
       - run: ls -l interop
       - run: ls -l /home/runner/work/exp-emscripten/exp-emscripten
       - run: pwd
