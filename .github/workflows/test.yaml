@@ -2,7 +2,7 @@ name: "emsdk"
 on: [push]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -10,10 +10,30 @@ jobs:
         with:
           version: 3.1.24
           actions-cache-folder: "emsdk-cache"
-
-      - name: Install
-        run: npm install
       - name: Build
         run: npm run build
+      - name: Upload bundle
+        uses: actions/upload-artifact@v3
+        with:
+          name: wasm
+          path: |
+            interop/builded.mjs
+            interop/builded.wasm
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+      - name: Download bundle
+        uses: actions/download-artifact@v3
+        with:
+          name: wasm
+      - name: Install
+        run: npm install
       - name: Test
         run: npm test
