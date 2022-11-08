@@ -4,6 +4,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    name: Compile C++ to wasm
     steps:
       - uses: actions/checkout@v3
       - uses: mymindstorm/setup-emsdk@v11
@@ -26,7 +27,7 @@ jobs:
     strategy:
       matrix:
         node: [ 14, 16, 18 ]
-    name: Node ${{ matrix.node }} sample
+    name: Test node v${{ matrix.node }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
