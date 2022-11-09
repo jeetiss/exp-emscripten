@@ -7,6 +7,6 @@ beforeAll(async () => {
 });
 
 test("simple lerp", async () => {
-  expect(lib.lerp).toBeDefined();
-  expect(lib.lerp(5, 10, 0.5)).toBe(7.5);
+  expect(lib.print).toBeDefined();
+  expect(lib.print()).toBe(0);
 });
