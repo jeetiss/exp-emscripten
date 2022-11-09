@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "emcc interop/*.cc --bind -Os -g0 --closure 1 -o interop/builded.mjs",
+    "build": "emcc interop/*.cc --bind -Os -g0 --closure 1 -o interop.mjs",
     "test": "vitest"
   },
   "devDependencies": {

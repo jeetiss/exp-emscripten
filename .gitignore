@@ -1,5 +1,5 @@
 node_modules
 
-builded.mjs
-builded.wasm
+*.mjs
+*.wasm
 .DS_Store

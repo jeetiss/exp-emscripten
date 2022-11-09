@@ -1,4 +1,4 @@
-name: "emsdk"
+name: "CI"
 on: [push]
 
 jobs:
@@ -12,14 +12,14 @@ jobs:
           version: 3.1.24
           actions-cache-folder: "emsdk-cache"
       - name: Build
-        run: npm run build
+        run: make
       - name: Upload bundle
         uses: actions/upload-artifact@v3
         with:
           name: wasm
           path: |
-            interop/builded.mjs
-            interop/builded.wasm
+            *.mjs
+            *.wasm
 
   test:
     needs: build
@@ -37,7 +37,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: wasm
-          path: interop/
       - name: Install
         run: npm install
       - name: Test

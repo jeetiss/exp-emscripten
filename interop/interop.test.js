@@ -1,17 +1,23 @@
 import { beforeAll, expect, test } from "vitest";
 import { readFile } from "node:fs/promises";
-import Module from "./builded.mjs";
 
-let lib;
-beforeAll(async () => {
-  lib = await Module({
+async function instantiateWasm(name) {
+  const [Module, binary] = await Promise.all([
+    import(`../${name}.mjs`).then(({ default: Module }) => Module),
+    readFile(new URL("../interop.wasm", import.meta.url)),
+  ]);
+
+  return Module({
     instantiateWasm: async (info, receiveInstance) => {
-      const binary = await readFile(new URL("./builded.wasm", import.meta.url));
       const { instance: wasm } = await WebAssembly.instantiate(binary, info);
-
       receiveInstance(wasm);
     },
   });
+}
+
+let lib;
+beforeAll(async () => {
+  lib = await instantiateWasm("interop");
 });
 
 test("cpp <- js interop", async () => {
