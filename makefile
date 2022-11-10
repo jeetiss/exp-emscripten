@@ -1,7 +1,13 @@
-all: example_interop example_simple
+CC=emcc
+
+all: example_wasm example_interop example_simple
 
 example_interop:
-	@emcc ./interop/*.cc --bind -Os -g0 --closure 1 -o interop.mjs
+	$(CC) ./interop/*.cc --bind -Os -g0 --closure 1 -o interop.mjs
 
 example_simple:
-	@emcc ./simple/*.cpp --bind -Os -g0 --closure 1 -o simple.mjs
+	$(CC) ./simple/*.cpp --bind -Os -g0 --closure 1 -o simple.mjs
+
+example_wasm:
+	$(CC) ./recursion/*.cpp --bind -Os -g0 --closure 1 -o recursion.mjs
+
