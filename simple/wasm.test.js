@@ -1,13 +1,13 @@
 import { describe, expect, test } from "vitest";
 import { instantiateWasm } from "../wasm";
 
-const lib = await instantiateWasm("recursion");
+const lib = await instantiateWasm("simple");
 
 export const createTests = (name, lib) => {
   describe(name, () => {
-    test("Access WebAssembly from cpp", async () => {
-      expect(lib.checkWebAssembly).toBeDefined();
-      expect(lib.checkWebAssembly()).toBe(true);
+    test("simple print", async () => {
+      expect(lib.print).toBeDefined();
+      expect(lib.print()).toBe(0);
     });
   });
 };
