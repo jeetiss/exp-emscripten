@@ -1,6 +1,6 @@
-import { instantiateWasm } from "../wasm";
+import { instantiateAsm } from "../wasm";
 import { createTests } from "./wasm.test";
 
-const lib = await instantiateWasm("interop");
+const lib = await instantiateAsm("interop");
 
 createTests("asm", lib);
