@@ -1,21 +1,26 @@
-CC=emcc
+build_wasm=emcc --bind -Os -g0 --closure 1 $^ -o $@
+build_asmjs=emcc --bind -Os -g0 --closure 1 --memory-init-file 0 -sWASM=0 $^ -o $@
 
-all: example_interop_asm example_interop_wasm example_simple_asm example_simple_wasm example_recursion_asm example_recursion_wasm
+.PHONY: all
 
-example_interop_asm:
-	$(CC) ./interop/*.cc --bind -Os -g0 --closure 1 --memory-init-file 0 -sWASM=0 -o interop_asm.mjs
+all: interop_wasm.mjs interop_asm.mjs \
+	simple_asm.mjs simple_wasm.mjs \
+	recursion_asm.mjs recursion_wasm.mjs
 
-example_interop_wasm:
-	$(CC) ./interop/*.cc --bind -Os -g0 --closure 1 -o interop_wasm.mjs
+interop_asm.mjs: 
+	$(build_asmjs) ./interop/*.cpp
 
-example_simple_asm:
-	$(CC) ./simple/*.cpp --bind -Os -g0 --closure 1 --memory-init-file 0 -sWASM=0 -o simple_asm.mjs
+recursion_asm.mjs:
+	$(build_asmjs) ./recursion/*.cpp
 
-example_simple_wasm:
-	$(CC) ./simple/*.cpp --bind -Os -g0 --closure 1 -o simple_wasm.mjs
+simple_asm.mjs: 
+	$(build_asmjs) ./simple/*.cpp
 
-example_recursion_asm:
-	$(CC) ./recursion/*.cpp --bind -Os -g0 --closure 1 --memory-init-file 0 -sWASM=0 -o recursion_asm.mjs
+interop_wasm.mjs:
+	$(build_wasm) ./interop/*.cpp
 
-example_recursion_wasm:
-	$(CC) ./recursion/*.cpp --bind -Os -g0 --closure 1 -o recursion_wasm.mjs
+simple_wasm.mjs:
+	$(build_wasm) ./simple/*.cpp
+
+recursion_wasm.mjs:
+	$(build_wasm) ./recursion/*.cpp
