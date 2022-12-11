@@ -3,12 +3,14 @@
 
 using namespace emscripten;
 
-bool checkWebAssembly() {
+bool checkWebAssembly()
+{
   val WebAssembly = val::global("WebAssembly");
 
   return WebAssembly.as<bool>();
 }
 
-EMSCRIPTEN_BINDINGS(my_module) {
-    function("checkWebAssembly", &checkWebAssembly);
+EMSCRIPTEN_BINDINGS(my_module)
+{
+  function("checkWebAssembly", &checkWebAssembly);
 }
