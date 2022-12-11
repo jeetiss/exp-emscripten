@@ -1,13 +1,16 @@
 #include <stdlib.h>
 #include <emscripten/bind.h>
 
-struct Callback
+class Callback
 {
+public:
+  virtual ~Callback() {}
   virtual int fn(int arg) = 0;
 };
 
-struct CallbackWrapper : public emscripten::wrapper<Callback>
+class CallbackWrapper : public emscripten::wrapper<Callback>
 {
+public:
   EMSCRIPTEN_WRAPPER(CallbackWrapper);
   int fn(int arg)
   {
